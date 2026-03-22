@@ -1,0 +1,154 @@
+import Link from "next/link";
+import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_RESERVE_URL } from "../lib/contact";
+import { BackToTop } from "./BackToTop";
+
+const SOCIAL = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/p/Bot%C3%A9-Kr%C3%A9yol-100063801624645/",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/botekreyoll/",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+      </svg>
+    ),
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@botekreyol118",
+    icon: (
+      <span
+        aria-hidden
+        className="block size-6 shrink-0 bg-current"
+        style={{
+          maskImage: "url('/tiktok.svg')",
+          WebkitMaskImage: "url('/tiktok.svg')",
+          maskSize: "contain",
+          WebkitMaskSize: "contain",
+          maskRepeat: "no-repeat",
+          WebkitMaskRepeat: "no-repeat",
+          maskPosition: "center",
+          WebkitMaskPosition: "center",
+        }}
+      />
+    ),
+  },
+] as const;
+
+const HOURS: { day: string; hours: string }[] = [
+  { day: "Mardi", hours: "09:00 – 17:00" },
+  { day: "Mercredi", hours: "09:00 – 17:00" },
+  { day: "Jeudi", hours: "09:00 – 17:00" },
+  { day: "Vendredi", hours: "09:00 – 17:00" },
+  { day: "Samedi", hours: "09:00 – 17:00" },
+];
+
+export function SiteFooter() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="mt-auto border-t border-foreground/10 bg-background px-6 py-12 md:px-10 md:py-14">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 gap-10 text-center md:grid-cols-3 md:gap-8 lg:gap-12">
+          <div>
+            <h2 className="footer-col-title font-hero font-semibold text-foreground">
+              Notre adresse
+            </h2>
+            <address className="mt-4 space-y-1 text-[0.9375rem] leading-relaxed text-foreground/65 not-italic md:text-base">
+              <p className="font-medium text-foreground/80">Boté Kréyol</p>
+              <p>3 Rue de l&apos;Egalité</p>
+              <p>Saint-François 97118</p>
+              <p>Guadeloupe</p>
+            </address>
+          </div>
+
+          <div>
+            <h2 className="footer-col-title font-hero font-semibold text-foreground">
+              Contact
+            </h2>
+            <p className="mt-4 text-[0.9375rem] text-foreground/65 md:text-base">
+              <a
+                href={`tel:${PHONE_E164}`}
+                className="text-foreground/80 transition-colors hover:text-accent"
+              >
+                {PHONE_DISPLAY}
+              </a>
+            </p>
+            <div className="mt-5 flex justify-center">
+              <Link
+                href={WHATSAPP_RESERVE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex border border-accent bg-accent px-6 py-2.5 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-background transition-colors hover:bg-accent/90"
+              >
+                Réserver
+              </Link>
+            </div>
+            <nav
+              className="mt-5 flex items-center justify-center gap-5 text-accent"
+              aria-label="Réseaux sociaux"
+            >
+              {SOCIAL.map(({ label, href, icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-opacity hover:opacity-80"
+                  aria-label={label}
+                >
+                  {icon}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div>
+            <h2 className="footer-col-title font-hero font-semibold text-foreground">
+              Horaires
+            </h2>
+            <ul className="mt-4 space-y-1.5 text-[0.9375rem] text-foreground/65 md:text-base">
+              {HOURS.map(({ day, hours }) => (
+                <li key={day}>
+                  <span className="text-foreground/80">{day}</span>
+                  <span className="mx-1.5 text-foreground/35">·</span>
+                  <span className="text-foreground/60">{hours}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-3 border-t border-foreground/10 pt-5 md:mt-10 md:flex-row md:items-center md:justify-between md:gap-0 md:pt-6">
+          <span className="hidden w-10 shrink-0 md:block" aria-hidden />
+          <p className="flex-1 text-center text-sm leading-snug text-foreground/50">
+            © {year} Boté Kréyol. Tous droits réservés.
+          </p>
+          <div className="shrink-0">
+            <BackToTop />
+          </div>
+        </div>
+
+        <p className="mt-4 border-t border-foreground/10 pt-4 text-center text-[0.6875rem] text-foreground/40 md:mt-5 md:pt-4">
+          Built by{" "}
+          <Link
+            href="https://www.andrewmondor.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground/55 underline decoration-foreground/15 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent/40"
+          >
+            Andrew Mondor
+          </Link>
+        </p>
+      </div>
+    </footer>
+  );
+}

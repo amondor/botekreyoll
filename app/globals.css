@@ -2,25 +2,57 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #363636;
+  --accent: #cb904d;
+  /* Réservé pour usage ultérieur (non utilisé dans l’UI pour l’instant) */
+  --brand-rose: #bc8da0;
+  /* Hero : une seule valeur pour la section + le calque au-dessus de l’image */
+  --hero-min-height: min(78dvh, 880px);
+  --h2-font-size: 59.8px;
+  --hero-h1-max: 87px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-accent: var(--accent);
+  --color-brand-rose: var(--brand-rose);
+  --font-sans: var(--font-jost);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-hero: var(--font-vollkorn);
+  --font-h2: var(--font-alex-brush);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  font-family: var(--font-vollkorn);
+  font-size: clamp(1.375rem, 4vw, var(--h2-font-size));
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+/* Titre hero : règle directe (évite les arbitrary Tailwind qui ignorent parfois clamp + var) */
+#hero-heading {
+  font-size: clamp(1.75rem, 4.2vw + 0.85rem, var(--hero-h1-max));
+  line-height: 1.1;
+}
+
+/* Titres des colonnes du footer (surcharge du h2 global) */
+h2.footer-col-title {
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+  h2.footer-col-title {
+    font-size: 1.0625rem;
+  }
 }
