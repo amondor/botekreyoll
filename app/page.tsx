@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { BentoPlaceholder } from "./components/BentoPlaceholder";
+import { GoogleReviewsSection } from "./components/GoogleReviewsSection";
 import { HeroAnimated } from "./components/HeroAnimated";
 import { IntroSection } from "./components/IntroSection";
+import { SalonShowcaseSection } from "./components/SalonShowcaseSection";
 import { ServicesSection } from "./components/ServicesSection";
 
 export default function Home() {
@@ -25,9 +26,10 @@ export default function Home() {
         </div>
       </section>
 
+      <SalonShowcaseSection />
       <ServicesSection />
+      <GoogleReviewsSection />
       <IntroSection />
-      <BentoPlaceholder />
     </>
   );
 }

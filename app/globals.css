@@ -6,10 +6,14 @@
   --accent: #cb904d;
   /* Réservé pour usage ultérieur (non utilisé dans l’UI pour l’instant) */
   --brand-rose: #bc8da0;
+  /* Jaune signature (titres brush, accents) */
+  --brand-yellow: #ffde59;
+  /* Barre de navigation au scroll */
+  --nav-scrolled: #53917e;
   /* Hero : une seule valeur pour la section + le calque au-dessus de l’image */
   --hero-min-height: min(78dvh, 880px);
   --h2-font-size: 59.8px;
-  --hero-h1-max: 87px;
+  --hero-h1-max: 118px;
 }
 
 @theme inline {
@@ -17,6 +21,8 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-brand-rose: var(--brand-rose);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-nav-scrolled: var(--nav-scrolled);
   --font-sans: var(--font-jost);
   --font-mono: var(--font-geist-mono);
   --font-hero: var(--font-vollkorn);
@@ -26,6 +32,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Navbar au scroll — couleur explicite (évite bg-nav-scrolled / vars non résolus selon le build). */
+header.site-header[data-scrolled="true"] {
+  background-color: #53917e;
 }
 
 h2 {
@@ -40,8 +51,8 @@ h2 {
 
 /* Titre hero : règle directe (évite les arbitrary Tailwind qui ignorent parfois clamp + var) */
 #hero-heading {
-  font-size: clamp(1.75rem, 4.2vw + 0.85rem, var(--hero-h1-max));
-  line-height: 1.1;
+  font-size: clamp(2.125rem, 5.8vw + 1rem, var(--hero-h1-max));
+  line-height: 1.08;
 }
 
 /* Titres des colonnes du footer (surcharge du h2 global) */
@@ -54,5 +65,18 @@ h2.footer-col-title {
 @media (min-width: 768px) {
   h2.footer-col-title {
     font-size: 1.0625rem;
+  }
+}
+
+/* Titres des catégories tarifs (surcharge du h2 global) */
+h2.pricing-category-title {
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  h2.pricing-category-title {
+    font-size: 1.25rem;
   }
 }

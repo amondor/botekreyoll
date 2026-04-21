@@ -26,7 +26,7 @@ export function HeroAnimated() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-5 pb-12 pt-2 md:px-10 md:pb-16 md:pt-4">
       <motion.div
-        className="relative mx-auto w-full max-w-4xl text-center"
+        className="relative mx-auto w-full max-w-4xl text-center md:max-w-5xl"
         variants={stagger}
         initial="hidden"
         animate="visible"
@@ -34,7 +34,7 @@ export function HeroAnimated() {
         <motion.div variants={fadeSlideUp} className="mb-8 md:mb-10">
           <h1
             id="hero-heading"
-            className="font-hero text-balance font-semibold tracking-tight text-white"
+            className="font-hero text-balance font-semibold tracking-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.55)]"
           >
             Révélez votre beauté naturelle
           </h1>
@@ -50,8 +50,8 @@ export function HeroAnimated() {
 
         <motion.div variants={fadeSlideUp}>
           <Link
-            href="#"
-            className="inline-flex border border-white/90 px-8 py-3.5 text-[0.7rem] font-semibold uppercase tracking-[0.26em] text-white transition-colors hover:bg-white/10 md:px-10 md:py-4 md:text-[0.75rem]"
+            href="/#services"
+            className="inline-flex border border-brand-yellow bg-brand-yellow px-8 py-3.5 text-[0.7rem] font-semibold uppercase tracking-[0.26em] text-foreground transition-colors hover:border-white hover:bg-transparent hover:text-white md:px-10 md:py-4 md:text-[0.75rem]"
           >
             Découvrir le salon
           </Link>

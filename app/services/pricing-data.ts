@@ -13,13 +13,43 @@ export type PriceCategory = {
   title: string;
   items?: PriceItem[];
   subsections?: PriceSubsection[];
+  /** Page dédiée : la carte « Nos services » (accueil) pointe ici au lieu de l’ancre tarifs. */
+  landingHref?: string;
+  /** Cartes supplémentaires sur l’accueil (même bloc tarifs, page descriptive distincte). */
+  linkedPages?: { title: string; href: string }[];
 };
+
+export type ServiceCard = {
+  title: string;
+  /** URL de la page descriptive (accueil : uniquement les catégories avec `landingHref` + `linkedPages`). */
+  href: string;
+};
+
+/** Cartes « Nos services » (accueil) : seulement les prestations ayant une page descriptive. */
+export function getServiceCards(): ServiceCard[] {
+  const cards: ServiceCard[] = [];
+  PRICING_COLUMNS.forEach((column) => {
+    column.forEach((category) => {
+      if (category.landingHref) {
+        cards.push({
+          title: category.title,
+          href: category.landingHref,
+        });
+      }
+      category.linkedPages?.forEach((page) => {
+        cards.push({ title: page.title, href: page.href });
+      });
+    });
+  });
+  return cards;
+}
 
 /** Deux colonnes : gauche épilations & mains/pieds, droite massages, visage, vajacial, sourcils, corps. */
 export const PRICING_COLUMNS: PriceCategory[][] = [
   [
     {
       title: "Épilations femmes",
+      landingHref: "/epilations-femmes",
       items: [
         { name: "Sourcils", price: "9€" },
         { name: "Lèvres / menton / joues", price: "10€" },
@@ -57,6 +87,7 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
     },
     {
       title: "Soins des pieds",
+      landingHref: "/soins-des-pieds",
       items: [
         { name: "Soin complet", price: "45€" },
         { name: "Mise en beauté", price: "28€" },
@@ -64,6 +95,7 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
     },
     {
       title: "Soins des mains",
+      landingHref: "/soins-des-mains",
       items: [
         { name: "Soin complet", price: "30€" },
         { name: "Mise en beauté", price: "22€" },
@@ -74,6 +106,7 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
   [
     {
       title: "Modelage relaxant / Massages",
+      landingHref: "/massage-relaxant",
       items: [
         { name: "Dos 20 min", price: "25€" },
         { name: "Postérieur 30 min", price: "35€" },
@@ -84,6 +117,7 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
     },
     {
       title: "Soins visage (H2O Facial & autres)",
+      landingHref: "/soin-du-visage",
       items: [
         { name: "Soin H2O BASIC", price: "90€" },
         { name: "Soin H2O PERFECT", price: "120€" },
@@ -97,6 +131,7 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
     },
     {
       title: "Soin vajacial",
+      landingHref: "/soin-vajacial",
       items: [
         { name: "Sans épilation", price: "45€" },
         { name: "Épilation intégral", price: "65€" },
@@ -128,6 +163,7 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
     },
     {
       title: "Sourcils & regard",
+      landingHref: "/sourcils",
       items: [
         { name: "Teinture sourcils henné", price: "45€" },
         { name: "Browlift", price: "55€" },
@@ -136,6 +172,13 @@ export const PRICING_COLUMNS: PriceCategory[][] = [
     },
     {
       title: "Soins corps (par zone)",
+      landingHref: "/minceur-soin-corps",
+      linkedPages: [
+        {
+          title: "Madérothérapie, G5, drainage minceur",
+          href: "/techniques-soins-corps",
+        },
+      ],
       subsections: [
         {
           title: "Radiofréquence",

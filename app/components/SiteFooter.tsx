@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_RESERVE_URL } from "../lib/contact";
+import {
+  PHONE_DISPLAY,
+  PHONE_E164,
+  SALON_ADDRESS_LINES,
+  SALON_HOURS,
+  WHATSAPP_RESERVE_URL,
+} from "../lib/contact";
 import { BackToTop } from "./BackToTop";
 
 const SOCIAL = [
@@ -43,14 +49,6 @@ const SOCIAL = [
   },
 ] as const;
 
-const HOURS: { day: string; hours: string }[] = [
-  { day: "Mardi", hours: "09:00 – 17:00" },
-  { day: "Mercredi", hours: "09:00 – 17:00" },
-  { day: "Jeudi", hours: "09:00 – 17:00" },
-  { day: "Vendredi", hours: "09:00 – 17:00" },
-  { day: "Samedi", hours: "09:00 – 17:00" },
-];
-
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
@@ -63,10 +61,14 @@ export function SiteFooter() {
               Notre adresse
             </h2>
             <address className="mt-4 space-y-1 text-[0.9375rem] leading-relaxed text-foreground/65 not-italic md:text-base">
-              <p className="font-medium text-foreground/80">Boté Kréyol</p>
-              <p>3 Rue de l&apos;Egalité</p>
-              <p>Saint-François 97118</p>
-              <p>Guadeloupe</p>
+              {SALON_ADDRESS_LINES.map((line, i) => (
+                <p
+                  key={line}
+                  className={i === 0 ? "font-medium text-foreground/80" : undefined}
+                >
+                  {line}
+                </p>
+              ))}
             </address>
           </div>
 
@@ -116,7 +118,7 @@ export function SiteFooter() {
               Horaires
             </h2>
             <ul className="mt-4 space-y-1.5 text-[0.9375rem] text-foreground/65 md:text-base">
-              {HOURS.map(({ day, hours }) => (
+              {SALON_HOURS.map(({ day, hours }) => (
                 <li key={day}>
                   <span className="text-foreground/80">{day}</span>
                   <span className="mx-1.5 text-foreground/35">·</span>
@@ -127,27 +129,25 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center gap-3 border-t border-foreground/10 pt-5 md:mt-10 md:flex-row md:items-center md:justify-between md:gap-0 md:pt-6">
-          <span className="hidden w-10 shrink-0 md:block" aria-hidden />
-          <p className="flex-1 text-center text-sm leading-snug text-foreground/50">
+        <div className="mt-8 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 gap-y-2 border-t border-foreground/10 pt-5 md:mt-10 md:gap-x-4 md:pt-6">
+          <p className="min-w-0 justify-self-start text-left text-xs leading-snug text-foreground/50 sm:text-sm">
             © {year} Boté Kréyol. Tous droits réservés.
           </p>
-          <div className="shrink-0">
+          <div className="justify-self-center shrink-0">
             <BackToTop />
           </div>
+          <p className="min-w-0 justify-self-end text-right text-xs leading-snug text-foreground/40 sm:text-sm">
+            Built by{" "}
+            <Link
+              href="https://www.andrewmondor.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-nav-scrolled underline decoration-nav-scrolled/35 underline-offset-2 transition-colors hover:opacity-85"
+            >
+              Andrew Mondor
+            </Link>
+          </p>
         </div>
-
-        <p className="mt-4 border-t border-foreground/10 pt-4 text-center text-[0.6875rem] text-foreground/40 md:mt-5 md:pt-4">
-          Built by{" "}
-          <Link
-            href="https://www.andrewmondor.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground/55 underline decoration-foreground/15 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent/40"
-          >
-            Andrew Mondor
-          </Link>
-        </p>
       </div>
     </footer>
   );

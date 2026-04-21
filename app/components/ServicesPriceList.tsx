@@ -60,7 +60,7 @@ function CategoryBlock({
     <section aria-labelledby={headingId}>
       <h2
         id={headingId}
-        className="font-hero mb-6 text-xl font-semibold tracking-tight text-foreground md:mb-8 md:text-[1.35rem]"
+        className="pricing-category-title font-hero mb-5 font-semibold text-foreground md:mb-6"
       >
         {category.title}
       </h2>
