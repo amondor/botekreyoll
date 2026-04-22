@@ -8,6 +8,8 @@
   --brand-rose: #bc8da0;
   /* Jaune signature (titres brush, accents) */
   --brand-yellow: #ffde59;
+  /* Marron foncé (accents ponctuels ; les cartes soins des pieds utilisent --accent) */
+  --brand-brown: #6b4c3b;
   /* Barre de navigation au scroll */
   --nav-scrolled: #53917e;
   /* Hero : une seule valeur pour la section + le calque au-dessus de l’image */
@@ -22,6 +24,7 @@
   --color-accent: var(--accent);
   --color-brand-rose: var(--brand-rose);
   --color-brand-yellow: var(--brand-yellow);
+  --color-brand-brown: var(--brand-brown);
   --color-nav-scrolled: var(--nav-scrolled);
   --font-sans: var(--font-jost);
   --font-mono: var(--font-geist-mono);
