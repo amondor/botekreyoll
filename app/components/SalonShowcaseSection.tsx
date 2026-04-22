@@ -1,13 +1,33 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+
+import {
+  homeFadeUp,
+  homeFadeUpDelayed,
+  homeFadeUpStill,
+  homeViewport,
+} from "../lib/home-motion";
 
 export function SalonShowcaseSection() {
+  const reduceMotion = useReducedMotion();
+  const textVariants = reduceMotion ? homeFadeUpStill : homeFadeUp;
+  const mediaVariants = reduceMotion ? homeFadeUpStill : homeFadeUpDelayed;
+
   return (
     <section
       className="border-t border-foreground/10 bg-background px-6 py-20 md:px-10 md:py-28"
       aria-labelledby="salon-showcase-title"
     >
       <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
-        <div className="order-2 md:order-1 md:col-span-5">
+        <motion.div
+          className="order-2 md:order-1 md:col-span-5"
+          variants={textVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={homeViewport}
+        >
           <p className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-foreground/75">
             L&apos;institut
           </p>
@@ -22,9 +42,15 @@ export function SalonShowcaseSection() {
             pensé pour votre confort. Chaque détail invite à la détente, entre soins sur mesure et
             accueil chaleureux.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="order-1 md:order-2 md:col-span-7">
+        <motion.div
+          className="order-1 md:order-2 md:col-span-7"
+          variants={mediaVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={homeViewport}
+        >
           <div className="relative aspect-[5/3] w-full overflow-hidden rounded-2xl border border-foreground/10 shadow-sm shadow-foreground/5 md:aspect-[16/10]">
             <Image
               src="/salon/botekreyol.JPG"
@@ -34,7 +60,7 @@ export function SalonShowcaseSection() {
               sizes="(max-width: 768px) 100vw, 60vw"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

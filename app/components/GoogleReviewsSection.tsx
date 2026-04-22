@@ -2,7 +2,9 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+
 import { GOOGLE_REVIEWS_URL } from "../lib/contact";
+import { homeFadeUp, homeFadeUpStill, homeViewport } from "../lib/home-motion";
 
 export type ReviewItem = {
   quote: string;
@@ -161,13 +163,20 @@ function ReviewsStaticGrid() {
 
 export function GoogleReviewsSection() {
   const reduceMotion = useReducedMotion();
+  const headingVariants = reduceMotion ? homeFadeUpStill : homeFadeUp;
 
   return (
     <section
       className="border-t border-foreground/10 bg-background py-20 md:py-28"
       aria-labelledby="reviews-heading"
     >
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
+      <motion.div
+        className="mx-auto max-w-6xl px-6 md:px-10"
+        variants={headingVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={homeViewport}
+      >
         <p className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-foreground/70">
           Avis Google
         </p>
@@ -177,7 +186,7 @@ export function GoogleReviewsSection() {
         >
           Commentaires &amp; avis
         </h2>
-      </div>
+      </motion.div>
 
       <div className="mt-12 md:mt-14">
         {reduceMotion ? (
@@ -189,7 +198,13 @@ export function GoogleReviewsSection() {
         )}
       </div>
 
-      <p className="mx-auto mt-10 max-w-6xl px-6 text-center text-sm text-foreground/55 md:mt-12 md:px-10">
+      <motion.p
+        className="mx-auto mt-10 max-w-6xl px-6 text-center text-sm text-foreground/55 md:mt-12 md:px-10"
+        variants={headingVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={homeViewport}
+      >
         <Link
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
@@ -198,7 +213,7 @@ export function GoogleReviewsSection() {
         >
           Voir tous les avis sur Google
         </Link>
-      </p>
+      </motion.p>
     </section>
   );
 }

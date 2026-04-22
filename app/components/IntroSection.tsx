@@ -1,4 +1,8 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+
 import {
   PHONE_DISPLAY,
   PHONE_E164,
@@ -6,8 +10,18 @@ import {
   SALON_MAP_EMBED_URL,
   SALON_MAP_OPEN_URL,
 } from "../lib/contact";
+import {
+  homeFadeUp,
+  homeFadeUpDelayed,
+  homeFadeUpStill,
+  homeViewport,
+} from "../lib/home-motion";
 
 export function IntroSection() {
+  const reduceMotion = useReducedMotion();
+  const colA = reduceMotion ? homeFadeUpStill : homeFadeUp;
+  const colB = reduceMotion ? homeFadeUpStill : homeFadeUpDelayed;
+
   return (
     <section
       className="bg-stone-100 px-6 py-16 md:px-10 md:py-24 lg:py-28"
@@ -15,7 +29,13 @@ export function IntroSection() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14 lg:items-start">
-          <div className="text-left lg:col-span-5">
+          <motion.div
+            className="text-left lg:col-span-5"
+            variants={colA}
+            initial="hidden"
+            whileInView="visible"
+            viewport={homeViewport}
+          >
             <p className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-foreground/70">
               Offrez-vous une pause
             </p>
@@ -58,9 +78,15 @@ export function IntroSection() {
                 </a>
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative min-h-[min(72vw,440px)] lg:col-span-7 lg:min-h-[520px] xl:min-h-[600px]">
+          <motion.div
+            className="relative min-h-[min(72vw,440px)] lg:col-span-7 lg:min-h-[520px] xl:min-h-[600px]"
+            variants={colB}
+            initial="hidden"
+            whileInView="visible"
+            viewport={homeViewport}
+          >
             <Link
               href={SALON_MAP_OPEN_URL}
               target="_blank"
@@ -79,7 +105,7 @@ export function IntroSection() {
                 allowFullScreen
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
